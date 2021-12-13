@@ -25,30 +25,68 @@ f_prime2 = f_prime.diff(x)
 
 def play(func_prime, guess):
     
-    x = getAns(func_prime, guess)
+    x = guess
+
     count = 0
 
-    step = 0.0000001
+    step = 0.02
   
-
-
-    while(abs(getAns(func_prime, x)) > 0.0001 and count < 100):
+    while(abs(getAns(func_prime, x)) > 0.01 and count < 400):
         
-        x = x - getAns(func_prime, x)*step
+        x = x - step
 
         count = count + 1
-       ## step = 1 / getAns(f_prime2, x)
+        #step = 1 / getAns(f_prime2, x)
         
     print(step)
-    print(count)
+    print("Count:", count)
 
     return x
 
-print(play(f_prime, 10))
+def play2(func_prime, guess):
+    
+    x = guess
+
+    count = 0
+
+    step = 0.2
+  
+    while(abs(getAns(func_prime, x)) > 0.01 and count < 400):
+        
+        x = x - step * (getAns(func_prime, x))
+
+        count = count + 1
+        if(abs(getAns(func_prime, x)) > 0.5):
+            step = 1 / getAns(f_prime2, x)
+        
+        
+    print("final step:", step)
+    print("Count:", count)
+    
+    return x
+
+print("guess x=", -0.5)
+value = play2(f_prime, -0.5)
+print("x:", value)
+print("y:", getAns(f, value), "\n")
+print("guess x=", 0.5)
+value = play2(f_prime, 0.5)
+print("x:", value)
+print("y:", getAns(f, value), "\n")
+
+
+for i in range(10):
+   print("guess x=", i)
+   value = play2(f_prime, i)
+   print("x:", value)
+   print("y:", getAns(f, value), "\n")
+    
 
 
 def printFunc():
 
     for i in range(10):
         print(f' {i}: {f_prime.subs(x,i)}')
+
+
 

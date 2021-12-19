@@ -31,7 +31,7 @@ def play(func_prime, guess):
 
     step = 0.02
   
-    while(abs(getAns(func_prime, x)) > 0.01 and count < 400):
+    while(abs(getAns(func_prime, x)) > 0.001 and count < 400):
         
         x = x - step
 
@@ -44,25 +44,14 @@ def play(func_prime, guess):
     return x
 
 def play2(func_prime, guess):
-    
     x = guess
-
     count = 0
-
     step = 0.2
-  
-    while(abs(getAns(func_prime, x)) > 0.01 and count < 400):
-        
+    while(abs(getAns(func_prime, x)) > 0.001 and count < 400):
         x = x - step * (getAns(func_prime, x))
-
         count = count + 1
         if(abs(getAns(func_prime, x)) > 0.5):
             step = 1 / getAns(f_prime2, x)
-        
-        
-    print("final step:", step)
-    print("Count:", count)
-    
     return x
 
 print("guess x=", -0.5)
